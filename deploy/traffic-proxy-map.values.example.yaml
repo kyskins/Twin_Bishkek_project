@@ -1,0 +1,22 @@
+# Example only. Adapt to your cluster, registry and current 2GIS chart version.
+# Keep credentials in a Kubernetes Secret or your deployment secret manager.
+dgctlDockerRegistry: docker.registry.example.com
+
+imagePullSecrets:
+  - onpremise-registry-creds
+
+replicaCount: 1
+
+proxy:
+  host: https://jam.api.2gis.com
+  locationDG: false
+
+ingress:
+  enabled: true
+  className: nginx
+  hosts:
+    - host: traffic-proxy-map.example.com
+      paths:
+        - path: /
+          pathType: Prefix
+  tls: []
